@@ -168,7 +168,7 @@ Below is the image of the final setup of the ESP32-CAM security system:
 
 ## Demo
 
-- [CamVisioTech MK0 - ESP32-CAM Security System Demo](https://www.instagram.com/p/CvfpnTPIu1L/)
+- [ESP32-CAM Security System (CamVisioTech MK0) Demo](https://www.instagram.com/p/CvfpnTPIu1L/)
 
 ---
 
