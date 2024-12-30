@@ -1,3 +1,2 @@
-TELEGRAM_API_TOKEN=your_telegram_api_token_here
-
-CHAT_ID=your_telegram_chat_id_here
+TELEGRAM_API_TOKEN=your_telegram_api_token
+TELEGRAM_CHAT_ID=your_chat_id
