@@ -10,11 +10,22 @@ import customtkinter as tk
 from customtkinter import CTkLabel as Label
 from customtkinter import CTkButton as Button
 from customtkinter import CTkEntry as Entry
+from dotenv import load_dotenv
 
-path = r'C:\Users\jjate\OneDrive\Desktop\esp32camTask4\image_folder'
+# Load environment variables
+load_dotenv()
 
+# Path to the image folder
+path = 'image_folder'
+
+# Get the Telegram API token from the environment variable
+api_token = os.getenv('TELEGRAM_API_TOKEN')
+
+if not api_token:
+    raise ValueError("Telegram API token is not set. Please add it to the .env file.")
+
+# Function to send a photo to Telegram
 def sendPhoto(image):
-    api_token = '5955424544:AAFLjRnBna8E4bM3anpOnN_yjjCzwPLq0fE'
     chat_id = '5763052274'
     url = f'https://api.telegram.org/bot{api_token}/sendPhoto'
     temp_filename = 'temp_image.jpg'
@@ -28,6 +39,7 @@ def sendPhoto(image):
     else:
         print('Failed to send photo.')
 
+# Load images and create encodings
 images = []
 classNames = []
 myList = os.listdir(path)
@@ -49,6 +61,7 @@ def findEncodings(images):
 encodeListKnown = findEncodings(images)
 print('Encoding Complete')
 
+# Process a video frame
 def process_frame():
     img_resp = urllib.request.urlopen(url)
     imgnp = np.array(bytearray(img_resp.read()), dtype=np.uint8)
@@ -89,6 +102,7 @@ def process_frame():
     panel.configure(image=imgtk)
     panel.after(1, process_frame)
 
+# Start video processing
 def start_processing():
     global url, urlOn, urlOff, buzzOn, buzzOff
     ip_address = ip_entry.get()
@@ -97,22 +111,23 @@ def start_processing():
     buzzOn = f'http://{ip_address}/buzz/1'
     root.after(1, process_frame)
 
+# Create GUI
 root = tk.CTk()
 root.title("ESP32Cam Security System")
 
-input_frame = tk.CTkFrame(root, )
+input_frame = tk.CTkFrame(root)
 input_frame.pack(pady=10)
 
-ip_label = Label(input_frame, text="IP Address:")
+ip_label = Label(input_frame, text="IP Address:", font=('Arial', 14))
 ip_label.grid(row=0, column=0)
 
-ip_entry = Entry(input_frame)
+ip_entry = Entry(input_frame, font=('Arial', 14))
 ip_entry.grid(row=0, column=1)
 
-start_button = Button(root, text="Start", command=start_processing)
+start_button = Button(root, text="Start", command=start_processing, font=('Arial', 14))
 start_button.pack(pady=10)
 
-panel = Label(root, text="")
+panel = Label(root, text="", font=('Arial', 14))
 panel.pack(padx=10, pady=10)
 
 root.mainloop()
