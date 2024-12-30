@@ -18,15 +18,18 @@ load_dotenv()
 # Path to the image folder
 path = 'image_folder'
 
-# Get the Telegram API token from the environment variable
+# Get the Telegram API token and chat ID from the environment variables
 api_token = os.getenv('TELEGRAM_API_TOKEN')
+chat_id = os.getenv('TELEGRAM_CHAT_ID')
 
 if not api_token:
     raise ValueError("Telegram API token is not set. Please add it to the .env file.")
 
+if not chat_id:
+    raise ValueError("Telegram chat ID is not set. Please add it to the .env file.")
+
 # Function to send a photo to Telegram
 def sendPhoto(image):
-    chat_id = '5763052274'
     url = f'https://api.telegram.org/bot{api_token}/sendPhoto'
     temp_filename = 'temp_image.jpg'
     cv2.imwrite(temp_filename, image)
