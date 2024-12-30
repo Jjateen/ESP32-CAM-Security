@@ -7,11 +7,22 @@ import face_recognition
 import requests
 import tkinter as tk
 from PIL import ImageTk, Image
+from dotenv import load_dotenv
 
-path = r'C:\Users\jjate\OneDrive\Desktop\esp32camTask4\image_folder'
+# Load environment variables from .env file
+load_dotenv()
 
+# Path to your image folder
+path = 'image_folder'
+
+# Get the Telegram API token from the environment variable
+api_token = os.getenv('TELEGRAM_API_TOKEN')
+
+if not api_token:
+    raise ValueError("Telegram API token is not set. Please add it to the .env file.")
+
+# Function to send a photo to Telegram
 def sendPhoto(image):
-    api_token = '5955424544:AAFLjRnBna8E4bM3anpOnN_yjjCzwPLq0fE'
     chat_id = '5763052274'
     url = f'https://api.telegram.org/bot{api_token}/sendPhoto'
     temp_filename = 'temp_image.jpg'
@@ -25,6 +36,7 @@ def sendPhoto(image):
     else:
         print('Failed to send photo.')
 
+# Load images and create encodings
 images = []
 classNames = []
 myList = os.listdir(path)
@@ -46,6 +58,7 @@ def findEncodings(images):
 encodeListKnown = findEncodings(images)
 print('Encoding Complete')
 
+# Function to process a frame
 def process_frame():
     img_resp = urllib.request.urlopen(url)
     imgnp = np.array(bytearray(img_resp.read()), dtype=np.uint8)
@@ -86,6 +99,7 @@ def process_frame():
     panel.config(image=imgtk)
     panel.after(1, process_frame)
 
+# Start processing
 def start_processing():
     global url, urlOn, buzzOn
     ip_address = ip_entry.get()
@@ -94,6 +108,7 @@ def start_processing():
     buzzOn = f'http://{ip_address}/buzz/1'
     root.after(1, process_frame)
 
+# Create GUI
 root = tk.Tk()
 root.title("ESP32Cam Security System")
 root.configure(bg='black')
