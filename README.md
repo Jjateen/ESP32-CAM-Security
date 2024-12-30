@@ -54,8 +54,8 @@ ESP32-CAM-Security/
 │   ├── esp32.svd
 │   └── finalCamProj.ino          # Main Arduino sketch controlling ESP32-CAM
 │
-├── guiTest.py                    # Old-school GUI with high latency
-├── guiNew.py                     # Modern GUI with lower latency
+├── tkinter_GUI.py                    # Old-school GUI with high latency
+├── ctkinter_GUI.py                     # Modern GUI with lower latency
 ├── LICENSE                       # Project license
 ├── README.md                     # Project documentation
 ├── final_setup.jpeg              # Final project setup image
@@ -103,7 +103,7 @@ ESP32-CAM-Security/
    - Ensure your ESP32 IP address is correctly set in the GUI for interaction with the hardware.
 
 3. **Run the GUI**:
-   - Run `guiNew.py` or `guiTest.py` depending on your latency preference.
+   - Run `ctkinter_GUI.py ` or `tkinter_GUI.py` depending on your latency preference.
    - The GUI will allow you to monitor the video feed and receive real-time notifications in case of intruder detection.
 
 ---
