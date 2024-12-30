@@ -93,6 +93,8 @@ ESP32-CAM-Security/
 
 ### 2. Python GUI Setup
 
+0. **Create a .env file refer [the .env template](./env_file_template.txt) for creating the environment variables.**
+
 1. **Install Python dependencies**:
    ```bash
    pip install opencv-python face_recognition requests pillow customtkinter numpy
